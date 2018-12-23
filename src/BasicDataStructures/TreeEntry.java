@@ -1,5 +1,9 @@
 package BasicDataStructures;
 
+/**
+ * Create Entry of Tree Data Structure which has left, right pointers to Entry element and element of that node
+ * @param <T>
+ */
 public class TreeEntry<T> {
     T element;
     TreeEntry<T> left;
