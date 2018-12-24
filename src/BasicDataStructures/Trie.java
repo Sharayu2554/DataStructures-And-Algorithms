@@ -2,10 +2,7 @@ package BasicDataStructures;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Trie<T> {
 
@@ -30,12 +27,6 @@ public class Trie<T> {
         root = new Entry<>(null, 0, false);
     }
 
-    /**
-     *
-     * @param iter
-     * @param value
-     * @return
-     */
     private T put(CharacterIterator iter, T value) {
         Entry current = root;
         for (char ch = iter.first(); ch != CharacterIterator.DONE; ch = iter.next()) {
@@ -103,6 +94,48 @@ public class Trie<T> {
         return false;
     }
 
+    private void displayTrieString(Entry current, String out, List<String> output) {
+        if (current.child.size() == 0 && current.isEndOfWord) {
+            System.out.println(out);
+            output.add(out);
+            return;
+        }
+        else if (current.isEndOfWord) {
+            System.out.println(out);
+            output.add(out);
+        }
+        if (current.child.size() != 0) {
+            for (Object ch : current.child.keySet()) {
+                displayTrieString((Entry) current.child.get(((Character) ch)), out + ch, output);
+            }
+        }
+    }
+
+    private List<String> autoComplete(CharacterIterator iter, String query) {
+        List<String> output = new LinkedList<>();
+        Entry current = root;
+
+        for (char ch = iter.first(); ch != CharacterIterator.DONE; ch = iter.next()) {
+            if (current.child.containsKey(ch)) {
+                current = (Entry) current.child.get(ch);
+            }
+            else {
+                return output;
+            }
+        }
+
+        if (current.child.size() == 0 && current.isEndOfWord) {
+            output.add(query);
+            return output;
+        }
+        else if (current.child.size() == 0) {
+            return output;
+        }
+        else {
+            displayTrieString(current, query, output);
+        }
+        return output;
+    }
 
     // public methods
     public T put(String s, T value) {
@@ -115,6 +148,10 @@ public class Trie<T> {
 
     public boolean remove(String s) {
         return remove(new StringCharacterIterator(s));
+    }
+
+    public List<String> autoComplete(String s) {
+        return autoComplete(new StringCharacterIterator(s), s);
     }
 
     // How many words in the dictionary start with this prefix?
@@ -147,30 +184,38 @@ public class Trie<T> {
             trie.put(s, wordno);
         }
 
-        System.out.println("Enter to get words : ");
-        while(in.hasNext()) {
-            String s = in.next();
-            if(s.equals("End")) { break; }
-            boolean val = trie.get(s);
-            System.out.println(s + "\t" + val);
-        }
-
-        System.out.println("Enter Remove words : ");
-        while(in.hasNext()) {
-            String s = in.next();
-            if(s.equals("End")) { break; }
-            boolean val = trie.remove(s);
-            System.out.println(s + "\t" + val);
-        }
-
-        System.out.println("Enter to get words : ");
-        while(in.hasNext()) {
-            String s = in.next();
-            if(s.equals("End")) { break; }
-            boolean val = trie.get(s);
-            System.out.println(s + "\t" + val);
-        }
+//        System.out.println("Enter to get words : ");
+//        while(in.hasNext()) {
+//            String s = in.next();
+//            if(s.equals("End")) { break; }
+//            boolean val = trie.get(s);
+//            System.out.println(s + "\t" + val);
+//        }
+//
+//        System.out.println("Enter Remove words : ");
+//        while(in.hasNext()) {
+//            String s = in.next();
+//            if(s.equals("End")) { break; }
+//            boolean val = trie.remove(s);
+//            System.out.println(s + "\t" + val);
+//        }
+//
+//        System.out.println("Enter to get words : ");
+//        while(in.hasNext()) {
+//            String s = in.next();
+//            if(s.equals("End")) { break; }
+//            boolean val = trie.get(s);
+//            System.out.println(s + "\t" + val);
+//        }
 
         System.out.println("Number of words in Trie : " + trie.size );
+        System.out.println("Check for autocomplete words : ");
+        while(in.hasNext()) {
+            String s = in.next();
+            if(s.equals("End")) { break; }
+            trie.autoComplete(s);
+//            System.out.println(s + "\t" + val);
+        }
+
     }
 }
