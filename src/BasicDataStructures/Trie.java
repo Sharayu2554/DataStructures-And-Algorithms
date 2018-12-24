@@ -96,12 +96,12 @@ public class Trie<T> {
 
     private void displayTrieString(Entry current, String out, List<String> output) {
         if (current.child.size() == 0 && current.isEndOfWord) {
-            System.out.println(out);
+//            System.out.println(out);
             output.add(out);
             return;
         }
         else if (current.isEndOfWord) {
-            System.out.println(out);
+//            System.out.println(out);
             output.add(out);
         }
         if (current.child.size() != 0) {
@@ -184,37 +184,39 @@ public class Trie<T> {
             trie.put(s, wordno);
         }
 
-//        System.out.println("Enter to get words : ");
-//        while(in.hasNext()) {
-//            String s = in.next();
-//            if(s.equals("End")) { break; }
-//            boolean val = trie.get(s);
-//            System.out.println(s + "\t" + val);
-//        }
-//
-//        System.out.println("Enter Remove words : ");
-//        while(in.hasNext()) {
-//            String s = in.next();
-//            if(s.equals("End")) { break; }
-//            boolean val = trie.remove(s);
-//            System.out.println(s + "\t" + val);
-//        }
-//
-//        System.out.println("Enter to get words : ");
-//        while(in.hasNext()) {
-//            String s = in.next();
-//            if(s.equals("End")) { break; }
-//            boolean val = trie.get(s);
-//            System.out.println(s + "\t" + val);
-//        }
+        System.out.println("Enter to get words : ");
+        while(in.hasNext()) {
+            String s = in.next();
+            if(s.equals("End")) { break; }
+            boolean val = trie.get(s);
+            System.out.println(s + "\t" + val);
+        }
+
+        System.out.println("Enter Remove words : ");
+        while(in.hasNext()) {
+            String s = in.next();
+            if(s.equals("End")) { break; }
+            boolean val = trie.remove(s);
+            System.out.println(s + "\t" + val);
+        }
+
+        System.out.println("Enter to get words : ");
+        while(in.hasNext()) {
+            String s = in.next();
+            if(s.equals("End")) { break; }
+            boolean val = trie.get(s);
+            System.out.println(s + "\t" + val);
+        }
 
         System.out.println("Number of words in Trie : " + trie.size );
         System.out.println("Check for autocomplete words : ");
         while(in.hasNext()) {
             String s = in.next();
             if(s.equals("End")) { break; }
-            trie.autoComplete(s);
-//            System.out.println(s + "\t" + val);
+            List<String> out = trie.autoComplete(s);
+            for (String res : out) {
+                System.out.println(res);
+            }
         }
 
     }
