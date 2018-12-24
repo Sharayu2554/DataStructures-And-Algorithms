@@ -218,6 +218,5 @@ public class Trie<T> {
                 System.out.println(res);
             }
         }
-
     }
 }
