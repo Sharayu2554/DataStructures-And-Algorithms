@@ -1,3 +1,9 @@
+/**
+ *
+ * Class to represent a Node of Binary Tree Data Structure
+ * @author Sharayu Sharad Mantri
+ *
+ */
 package BasicDataStructures;
 
 /**

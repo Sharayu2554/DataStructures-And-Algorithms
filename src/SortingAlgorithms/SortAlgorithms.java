@@ -1,3 +1,10 @@
+/**
+ *
+ * Class to implement all Sorting Algorithms
+ * TODO: Bucket Sort, Radix Sort and more
+ * @author Sharayu Sharad Mantri
+ *
+ */
 package SortingAlgorithms;
 
 import java.util.*;

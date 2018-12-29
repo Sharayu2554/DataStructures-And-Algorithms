@@ -1,3 +1,10 @@
+/**
+ *
+ * Class to represent a Trie Data Structure
+ * @author Sharayu Sharad Mantri
+ *
+ */
+
 package BasicDataStructures;
 
 import java.text.CharacterIterator;

@@ -1,3 +1,9 @@
+/**
+ *
+ * Class to implement Huffman Coding
+ * @author Sharayu Sharad Mantri
+ *
+ */
 package HuffmanCoding;
 
 import BasicDataStructures.TreeEntry;

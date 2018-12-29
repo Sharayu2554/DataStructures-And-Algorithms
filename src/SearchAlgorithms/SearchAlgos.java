@@ -1,3 +1,10 @@
+/**
+ *
+ * Class to implement Search Algorithms
+ * TODO: Need to add more algo's
+ * @author Sharayu Sharad Mantri
+ *
+ */
 package SearchAlgorithms;
 
 import java.util.Arrays;

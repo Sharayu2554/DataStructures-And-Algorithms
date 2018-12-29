@@ -1,3 +1,9 @@
+/**
+ *
+ * Class to represent a Fibannaci Number Series
+ * @author Sharayu Sharad Mantri
+ *
+ */
 package FibonnaciNumber;
 
 public class FibonnaciNumber {

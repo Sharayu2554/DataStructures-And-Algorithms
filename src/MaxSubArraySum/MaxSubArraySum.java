@@ -1,3 +1,9 @@
+/**
+ *
+ * Class to implement Get Max Sub Array Sum
+ * @author Sharayu Sharad Mantri
+ *
+ */
 package MaxSubArraySum;
 
 public class MaxSubArraySum {
