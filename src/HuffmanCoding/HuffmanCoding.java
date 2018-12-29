@@ -14,7 +14,7 @@ public class HuffmanCoding {
      * String code : is the code of the tree read so far
      * root : current node of the tree with huffman code value in code
      */
-    public static void printHuffmanCodes(TreeEntry<HuffmanNode> root, String code) {
+     private static void printHuffmanCodes(TreeEntry<HuffmanNode> root, String code) {
 
         //if node doesn't have left and right, means its leaf node and hence, print its huffman code of the element in leaf location
         if (root.getLeft() == null && root.getRight() == null) {
@@ -60,12 +60,12 @@ public class HuffmanCoding {
         //iterate until there is only one node in the heap
         while (!pq.isEmpty() && pq.size() > 1) {
             //remove top 2 (min nodes) from the heap
-            TreeEntry<HuffmanNode> x = (TreeEntry) pq.remove();
-            TreeEntry<HuffmanNode> y = (TreeEntry) pq.remove();
+            TreeEntry<HuffmanNode> x = pq.remove();
+            TreeEntry<HuffmanNode> y = pq.remove();
 
             //add their counts and create a new node with new count and x as left of that node and  y as right of the node
             TreeEntry entrynode = new TreeEntry(
-                    new HuffmanNode('x', ((HuffmanNode) x.getElement()).count + ((HuffmanNode) y.getElement()).count ),
+                    new HuffmanNode('x', x.getElement().count +  y.getElement().count ),
                     x, y
             );
 
@@ -74,7 +74,7 @@ public class HuffmanCoding {
         }
 
         //remove the final tree node from the heap and print huffman codes of all elements.
-        printHuffmanCodes((TreeEntry) pq.remove(), "");
+        printHuffmanCodes( pq.remove(), "");
     }
 
     static class HuffmanNode {
@@ -82,7 +82,7 @@ public class HuffmanCoding {
         char data;  //input char element
 
         //constructor
-        public HuffmanNode(char in, int c) {
+        HuffmanNode(char in, int c) {
             this.data = in;
             this.count = c;
         }
