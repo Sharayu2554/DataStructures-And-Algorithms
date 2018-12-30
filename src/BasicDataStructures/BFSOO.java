@@ -93,6 +93,10 @@ public class BFSOO extends Graph.GraphAlgorithm<BFSOO.BFSVertex> {
         setDistance(v, getDistance(u) + 1);
     }
 
+    /**
+     * Implemented by Sharayu Mantri
+     * @param src
+     */
     public void bfs(Vertex src) {
         setSource(src);
         initialize(src);
