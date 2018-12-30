@@ -21,14 +21,14 @@ import java.util.Scanner;
 
 /**
  * TODO :
- * 0. Detect Cycle in DAG
- * 1. Find Topological Order in DAG
+ * 0. Detect Cycle in DAG - Done  (In Topological Order )
+ * 1. Find Topological Order in DAG -Done
  * 2. Count Number of Paths in DAG
  * 3. Print All Paths in DAG
  * 4. Find all Shortest Path in unWeighted DAG
  * 5. Find all Shortest Path in Weighted DAG
  * 6. Find Longest Path in DAG
- * 7. Find total Number of components
+ * 7. Find total Number of components - Done
  * 8. Find all Strongly Connected Components
  * 9. Implement PERT/CPM
  * 10. Euler Circuit in DAG : Eulerian Path is a path in graph that visits every edge exactly once. Eulerian Circuit is an Eulerian Path which starts and ends on the same vertex.
