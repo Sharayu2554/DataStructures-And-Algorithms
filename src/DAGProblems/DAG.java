@@ -15,25 +15,23 @@ import BasicDataStructures.Graph.GraphAlgorithm;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * TODO :
  * 0. Detect Cycle in DAG - Done  (In Topological Order )
  * 1. Find Topological Order in DAG -Done
- * 2. Count Number of Paths in DAG
- * 3. Print All Paths in DAG
- * 4. Find all Shortest Path in unWeighted DAG
- * 5. Find all Shortest Path in Weighted DAG
- * 6. Find Longest Path in DAG
+ * 2. Count Number of Paths in DAG - Done
+ * 3. Print All Topological Order in DAG - Done
+ * 4. Find all Shortest Path in unWeighted DAG - Done
+ * 5. Find all Shortest Path in Weighted DAG - Done
+ * 6. Find Longest Path in DAG - Done
  * 7. Find total Number of components - Done
  * 8. Find all Strongly Connected Components
  * 9. Implement PERT/CPM
  * 10. Euler Circuit in DAG : Eulerian Path is a path in graph that visits every edge exactly once. Eulerian Circuit is an Eulerian Path which starts and ends on the same vertex.
  * 11. Shortest Path with Exactly K Edges in  DAG and Weighted Graph
- * 12. MultiSource Shortets Path in UnWeighted Graph
+ * 12. MultiSource Shortest Paths in UnWeighted Graph
  * 13. Find if there is path between two vertices in a DAG
  * 14. Johnson’s algorithm for All-pairs shortest paths
  */
@@ -72,9 +70,20 @@ public class DAG extends GraphAlgorithm<DAGVertex> {
         dv.color = "BLACK";
     }
 
-    public void topologicalOrderInDAG() {
+    public LinkedList<DAGVertex> topologicalOrderInDAG() {
 
         LinkedList<DAGVertex> tologyOrder = new LinkedList();
+        //Intialize all the vertices
+        for (Vertex u : g) {
+            DAGVertex du = get(u);
+            du.seen = false;
+            du.parent = null;
+            du.distance = Integer.MAX_VALUE;
+            du.color = "WHITE";
+            du.cPath = 0;
+            du.cno = 0;
+        }
+
         int cno = 0;
         for (Vertex v : g) {
             DAGVertex dv = get(v);
@@ -87,6 +96,115 @@ public class DAG extends GraphAlgorithm<DAGVertex> {
             System.out.println("Cycle Exisits");
         }
         System.out.println(" Topological Order :  " + Arrays.toString(tologyOrder.toArray()));
+        return tologyOrder;
+    }
+
+    public int countTotalPaths() {
+        LinkedList<DAGVertex> topologicalOrder = topologicalOrderInDAG();
+        DAGVertex v = topologicalOrder.getFirst();
+        v.cPath = 1;
+
+        for (DAGVertex dv : topologicalOrder) {
+            for (Graph.Edge e : g.incident(dv.u)) {
+                DAGVertex du = get(e.otherEnd(dv.u));
+                du.cPath += dv.cPath;
+            }
+        }
+        System.out.println(" Topological Order :  " + Arrays.toString(topologicalOrder.toArray()));
+        return topologicalOrder.getLast().cPath;
+    }
+
+    public void printAllPathsInDAG() {
+        //intialize graph and indegreeArray
+        int[] indegree = new int[g.size()];
+        for (Vertex u : g) {
+            DAGVertex du = get(u);
+            du.seen = false;
+            indegree[u.getIndex()] = u.inDegree();
+        }
+        printAllPathsInDAG(new ArrayList<>(g.size()), indegree);
+    }
+
+    public void printAllPathsInDAG(ArrayList<DAGVertex> out, int[] indegree) {
+        boolean done = true;
+
+        for (Vertex u : g) {
+            DAGVertex du = get(u);
+            if (!du.seen && indegree[u.getIndex()] == 0) {
+
+                du.seen = true;
+                out.add(du);
+                for (Graph.Edge e : g.incident(u)) {
+                    DAGVertex dv = get(e.otherEnd(u));
+                    indegree[dv.u.getIndex()]--;
+                }
+
+                printAllPathsInDAG(out, indegree);
+
+                du.seen = false;
+                out.remove(du);
+                for (Graph.Edge e : g.incident(u)) {
+                    DAGVertex dv = get(e.otherEnd(u));
+                    indegree[dv.u.getIndex()]++;
+                }
+
+                done = false;
+            }
+        }
+
+        if (done) {
+            System.out.println(Arrays.toString(out.toArray()));
+        }
+    }
+
+    //FIND SHORTest Path in Weighted DAG
+    public void shortestPathInDAG() {
+
+        //find topological order of DAG
+        LinkedList<DAGVertex> topologicalOrder = topologicalOrderInDAG();
+        for (Vertex u : g) {
+            DAGVertex du = get(u);
+            du.seen = false;
+            du.parent = null;
+            du.distance = Integer.MAX_VALUE;
+            du.color = "WHITE";
+        }
+
+        topologicalOrder.getFirst().distance = 0;
+        for (DAGVertex du : topologicalOrder) {
+            for(Graph.Edge e: g.incident(du.u)) {
+                DAGVertex dv = get(e.otherEnd(du.u));
+                if (dv.distance > du.distance + e.getWeight()) {
+                    dv.distance = du.distance + e.getWeight();
+                    dv.parent = du;
+                }
+            }
+        }
+
+        System.out.println(" print path " + Arrays.toString(topologicalOrder.toArray()));
+    }
+
+    public void longestPathInDAG() {
+
+        LinkedList<DAGVertex> finalList = topologicalOrderInDAG();
+        for (Vertex u : g) {
+            DAGVertex du = get(u);
+            du.seen = false;
+            du.parent = null;
+            du.distance = 0;
+            du.color = "WHITE";
+        }
+        for (DAGVertex du : finalList) {
+            for(Graph.Edge e: g.incident(du.u)) {
+                DAGVertex dv = get(e.otherEnd(du.u));
+                if (dv.distance > du.distance - e.getWeight()) {
+                    dv.distance = du.distance - e.getWeight();
+                    dv.parent = du;
+                }
+            }
+        }
+
+        System.out.println(" print path " + Arrays.toString(finalList.toArray()));
     }
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -107,6 +225,12 @@ public class DAG extends GraphAlgorithm<DAGVertex> {
         Vertex s = g.getVertex(1);
 
         DAG m = new DAG(g);
-        m.topologicalOrderInDAG();
+//        m.topologicalOrderInDAG();
+//        System.out.println("COUNT IS " + m.countTotalPaths());
+//        m.printAllPathsInDAG();
+        m.shortestPathInDAG();
+        System.out.println("\n");
+        m.longestPathInDAG();
+
     }
 }
