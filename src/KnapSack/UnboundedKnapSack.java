@@ -51,14 +51,11 @@ public class UnboundedKnapSack {
     public static int unboundedKnapsack(int W, int n, int val[], int[] wt) {
         int[] dp = new int[W+1];
         for (int i = 0; i <= W; i++) {
-            System.out.print("\n i : " + i);
             for (int j = 0; j < n; j++) {
                 if (wt[j] <= i) {
                     dp[i] = max(dp[i], val[j] + dp[i - wt[j]]);
-                    System.out.println(" dp[i] when j is " + j + " = "  + dp[i]);
                 }
             }
-            System.out.println(Arrays.toString(dp));
         }
         System.out.println(" ");
         return dp[W];
