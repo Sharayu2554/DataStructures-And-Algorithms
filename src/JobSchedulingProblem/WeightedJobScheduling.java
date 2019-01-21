@@ -9,8 +9,6 @@
 package JobSchedulingProblem;
 
 import java.util.Arrays;
-import java.util.Collections;
-
 /**
  * Given set of jobs with start and end interval and profit, how to maximize profit such that
  * jobs in subset do not overlap.

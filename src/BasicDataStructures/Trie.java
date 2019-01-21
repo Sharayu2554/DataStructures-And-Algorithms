@@ -3,6 +3,12 @@
  * Class to represent a Trie Data Structure
  * @author Sharayu Sharad Mantri
  *
+ * Trie Used in Prefix Search and alphabetic ordering for dictionary purpose or nearest neighbor search
+ * Trie is an efficient information reTrieval data structure
+ * If we use well balanced BST, run time is O (M * logN), where M is maximum string length and N keys in tree
+ * With Trie Data Structure, Run time for search a key will be O(M)
+ * Penalty is n Trie Storage Requirment
+ *
  */
 
 package BasicDataStructures;
@@ -17,6 +23,7 @@ public class Trie<T> {
         T ele;
         HashMap<Character, Entry<T>> child;
         int depth;
+
         boolean isEndOfWord;
 
         public Entry(T ele, int depth, boolean isEndOfWord) {

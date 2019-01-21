@@ -12,6 +12,11 @@ public class DisjointSet {
 
     int[] parent;
 
+
+    /**
+     * Intialize parent array with parent[i] = i
+     * @param size
+     */
     public DisjointSet(int size) {
         parent  = new int[size + 1];
         for (int i = 0; i <= size; i++) {
@@ -19,6 +24,16 @@ public class DisjointSet {
         }
     }
 
+    /**
+     * if parent[i] == i then return i
+     * else recursively call find function to find parent of parent.
+     * This merge and find operation is naive approach, since worst case complexity is O(N)
+     *
+     * If disjoint set implemented with rank, it can be optimized to O(log N)
+     *
+     * @param s
+     * @return
+     */
     public int find(int s) {
         if (parent[s] == s) {
             return s;

@@ -1,5 +1,7 @@
 /**
- * Class to implement
+ * Class to implement KMP Algorithm for pattern searching in string
+ * Run Time of normal algo was O (m * n)
+ * Run Time of KMP algorithm is O(m + n)
  *
  * @author Sharayu Sharad Mantri
  * Date : 1/19/2019
@@ -7,8 +9,6 @@
  */
 
 package SearchPatterns;
-
-import java.util.Arrays;
 
 public class KMP {
 
