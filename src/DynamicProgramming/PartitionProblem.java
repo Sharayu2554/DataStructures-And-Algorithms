@@ -44,6 +44,11 @@ public class PartitionProblem {
                 else {
                     dp[i][j] = dp[i - i][j] || dp[i - 1][j - arr[i - 1]];
                 }
+                //optimized if value becomes true before it reached end,
+                //stop there, not need to process any further
+                if (j == sum && dp[i][j]) {
+                    return dp[i][sum];
+                }
             }
         }
         return dp[arr.length][sum];
@@ -51,7 +56,7 @@ public class PartitionProblem {
 
     public static void main(String args[]) {
 
-        int[] arr = {3, 1, 1, 2, 1, 10};
+        int[] arr = {3, 1, 8, 2, 1, 1};
         int sum = Arrays.stream(arr).sum();
         if (sum % 2 == 0) {
 //            System.out.println("parition is possible " + PartitionRecur(arr, sum/2, 0));

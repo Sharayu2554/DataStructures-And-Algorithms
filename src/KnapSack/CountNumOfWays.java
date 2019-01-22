@@ -9,7 +9,7 @@
 package KnapSack;
 
 /**
- * iven a set of m distinct positive integers and a value ‘N’.
+ * Given a set of m distinct positive integers and a value ‘N’.
  * The problem is to count the total number of ways we can form ‘N’ by doing sum of the array elements.
  * Repetitions and different arrangements are allowed.
  *

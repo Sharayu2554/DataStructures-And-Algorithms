@@ -48,10 +48,10 @@ public class HuffmanCoding {
             public int compare(TreeEntry<HuffmanNode> o1, TreeEntry<HuffmanNode> o2) {
                 if (o1.equals(o2)) {
                     return 0;
-                } else if (((HuffmanNode) o1.getElement()).count < ((HuffmanNode) o2.getElement()).count) {
+                } else if (( o1.getElement()).count < (o2.getElement()).count) {
                     return -1;
                 } else {
-                    return ((HuffmanNode) o1.getElement()).count > ((HuffmanNode) o2.getElement()).count ? 1 : -1;
+                    return ( o1.getElement()).count > ( o2.getElement()).count ? 1 : -1;
                 }
             }
         });

@@ -33,26 +33,6 @@ public class ParitionProblemIn3 {
         return A || B || C;
     }
 
-    public static boolean PartitionDP(int[] arr, int sum) {
-        boolean[][] dp = new boolean[arr.length +1][sum+1];
-
-        for (int i = 0; i <= arr.length; i++) {
-            dp[i][0] = true;
-        }
-
-        for (int i = 1; i <= arr.length; i++) {
-            for(int j = 1; j <= sum; j++) {
-                if (j - arr[i-1] < 0) {
-                    dp[i][j] =  dp[i-1][j];
-                }
-                else {
-                    dp[i][j] = dp[i - i][j] || dp[i - 1][j - arr[i - 1]];
-                }
-            }
-        }
-        return dp[arr.length][sum];
-    }
-
     public static void main(String args[]) {
 
         int[] arr = { 7, 3, 2, 1, 5, 4, 14};

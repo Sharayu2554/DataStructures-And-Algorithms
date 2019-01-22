@@ -6,9 +6,22 @@
  * Project : KnapSack
  */
 
+/**
+ * Given weights and values of n items, put these items in a knapsack of capacity W to get the maximum total value
+ * in the knapsack. In other words, given two integer arrays val[0..n-1] and wt[0..n-1] which represent values and
+ * weights associated with n items respectively. Also given an integer W which represents knapsack capacity, find out
+ * the maximum value subset of val[] such that sum of the weights of this subset is smaller than or equal to W.
+ * You cannot break an item, either pick the complete item, or don’t pick it (0-1 property).
+ *   val[] = {60, 100, 120};
+ *   wt[] = {10, 20, 30};
+ *   W = 50;
+ *
+ *   Output : 220
+ */
 package KnapSack;
 
 public class KnapSack01 {
+
     // A utility function that returns maximum of two integers
     static int max(int a, int b) { return (a > b)? a : b; }
 
@@ -50,9 +63,9 @@ public class KnapSack01 {
     public static void main(String args[])
     {
         int val[] = new int[]{120, 100, 60};
-        int wt[] = new int[]{30, 20, 10};
-        int  W = 50;
+        int wt[] = new int[]{3, 2, 1};
+        int  W = 5;
         int n = val.length;
-        System.out.println(knapSackOptimized(W, wt, val, n));
+        System.out.println(knapSack(W, wt, val, n));
     }
 }

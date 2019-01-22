@@ -9,7 +9,7 @@ package MaxSubArraySum;
 public class MaxSubArraySum {
 
     //Divide and Conquer Algorithm takes O(NlogN)
-    //Hence, Kadane's approch is better since
+    //Hence, Kadane's approach is better since
     //Run Time : O(N)
     public static int kadanesMethod(int[] input) {
         int sum = 0, ans = 0, startIndex = -1, lastIndex = -1;
