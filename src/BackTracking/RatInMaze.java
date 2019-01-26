@@ -65,12 +65,47 @@ public class RatInMaze {
         }
     }
 
+    public int countPaths(int[][] maze) {
+
+        int[][] path = new int[maze.length][maze[0].length];
+        int R = maze.length;
+        int C = maze[0].length;
+
+        for (int i = 0; i < R; i++) {
+            if (maze[i][0] == 1)
+                path[i][0] = 1;
+            else
+                break;
+        }
+
+        for (int i = 1; i < C; i++) {
+            if (maze[0][i] == 1)
+                path[0][i] = 1;
+            else
+                break;
+        }
+
+        for (int i =1; i < R; i++) {
+            for (int j = 1; j < C; j++) {
+
+                if (maze[i][j] == 0)
+                    continue;
+
+                else
+                    path[i][j] += path[i][j-1] + path[i-1][j];
+            }
+        }
+
+        return path[R-1][C-1];
+    }
+
     public static void main(String args[])
     {
         RatInMaze rat = new RatInMaze();
-        int maze[][] = {{1, 0, 0, 0},
-                {1, 1, 1, 1},
-                {0, 1, 0, 0},
+        int maze[][] = {
+                {1, 0, 0, 0},
+                {1, 1, 0, 1},
+                {1, 1, 1, 0},
                 {1, 1, 1, 1}
         };
         System.out.println(" Maze is ");
@@ -78,5 +113,7 @@ public class RatInMaze {
 
         System.out.println("\nSolution is :");
         rat.solveMaze(maze);
+
+        System.out.println(" Total Paths count is : " + rat.countPaths(maze));
     }
 }
