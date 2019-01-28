@@ -74,5 +74,6 @@ public class WeightedJobScheduling {
         jobs[5] = new WeightJob(7,9,2);
         WeightedJobScheduling wj = new WeightedJobScheduling();
         System.out.println(" MAX PROFIT MADE IS " + wj.getMaxProdut(jobs));
+
     }
 }
