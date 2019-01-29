@@ -52,23 +52,42 @@ public class MaxSubsequenceSumAdjacent {
         return Math.max(Math.max(inc, ex), ex_1);
     }
 
+    public static int maxSumOptimized(int[] arr) {
+        int exc_n;
+        int inc  = arr[0];
+        int ex = 0;
+
+        for (int i = 1; i< arr.length; i++) {
+            exc_n = inc > ex ? inc : ex;
+            inc = arr[i] + ex;
+            ex = exc_n;
+        }
+        return Math.max(inc, ex);
+    }
+
     public static void main(String args[]) {
         int arr[] = {5, 5, 10, 100, 10, 5};
         System.out.println(" Result  " + subSequenceSum(arr));
+        System.out.println(" Result  " + maxSumOptimized(arr));
 
         int arr1[] = {1, 2, 3};
         System.out.println(" Result  " + subSequenceSum(arr1));
+        System.out.println(" Result  " + maxSumOptimized(arr1));
 
         int arr2[] = {1, 20, 3};
         System.out.println(" Result  " + subSequenceSum(arr2));
+        System.out.println(" Result  " + maxSumOptimized(arr2));
 
         int arr3[] = {3, 2, 7, 10 };
         System.out.println(" Result  " + subSequenceSum(arr3));
+        System.out.println(" Result  " + maxSumOptimized(arr3));
 
         int arr4[]= {3, 2, 5, 10, 7};
         System.out.println(" Result  " + subSequenceSum(arr4));
+        System.out.println(" Result  " + maxSumOptimized(arr4));
 
         int arr5[] = {1, 2};
         System.out.println(" Result  " + subSequenceSum(arr5));
+        System.out.println(" Result  " + maxSumOptimized(arr5));
     }
 }
