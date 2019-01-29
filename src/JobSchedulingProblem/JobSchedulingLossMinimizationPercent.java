@@ -42,7 +42,7 @@ public class JobSchedulingLossMinimizationPercent {
     }
 
     public static void main(String args[]) {
-        Integer[] vols = {4, 2, 151, 15, 1, 52, 12};
+        Integer[] vols = {4, 2, 151, 15, 1, 52, 12 };
         System.out.println("Minimized Loss : " + lossMinimization(vols, 0.10));
     }
 }

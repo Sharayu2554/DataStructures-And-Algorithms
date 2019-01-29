@@ -85,7 +85,7 @@ public class JobSchedulingDp {
 
     public static void main(String args[])
     {
-        ArrayList<Job> arr=new ArrayList<Job>();
+        ArrayList<Job> arr = new ArrayList<Job>();
         arr.add(new Job('a',2,100));
         arr.add(new Job('b',1,19));
         arr.add(new Job('c',2,27));
