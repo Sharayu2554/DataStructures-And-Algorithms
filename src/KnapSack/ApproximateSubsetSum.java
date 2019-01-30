@@ -10,6 +10,11 @@ package KnapSack;
 
 import java.util.Arrays;
 
+/**
+ * Find a subset whose sum is closest to K, but not more.
+ *
+ */
+
 public class ApproximateSubsetSum {
 
     public static int subset(int[] arr, int k) {
