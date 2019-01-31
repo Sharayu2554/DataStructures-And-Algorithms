@@ -6,7 +6,7 @@
  */
 package HuffmanCoding;
 
-import BasicDataStructures.TreeEntry;
+import BasicDataStructures.Node;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -20,7 +20,7 @@ public class HuffmanCoding {
      * String code : is the code of the tree read so far
      * root : current node of the tree with huffman code value in code
      */
-     private static void printHuffmanCodes(TreeEntry<HuffmanNode> root, String code) {
+     private static void printHuffmanCodes(Node<HuffmanNode> root, String code) {
 
         //if node doesn't have left and right, means its leaf node and hence, print its huffman code of the element in leaf location
         if (root.getLeft() == null && root.getRight() == null) {
@@ -44,8 +44,8 @@ public class HuffmanCoding {
 
         //Creating Priority Queue of Type TreeEntry where TreeEntry is made of HuffmanNode Object
         //Passing comparator to create min priority queue on the count of root node of tree
-        PriorityQueue<TreeEntry<HuffmanNode>> pq = new PriorityQueue(n, new Comparator<TreeEntry<HuffmanNode>>() {
-            public int compare(TreeEntry<HuffmanNode> o1, TreeEntry<HuffmanNode> o2) {
+        PriorityQueue<Node<HuffmanNode>> pq = new PriorityQueue(n, new Comparator<Node<HuffmanNode>>() {
+            public int compare(Node<HuffmanNode> o1, Node<HuffmanNode> o2) {
                 if (o1.equals(o2)) {
                     return 0;
                 } else if (( o1.getElement()).count < (o2.getElement()).count) {
@@ -59,18 +59,18 @@ public class HuffmanCoding {
         //Iterate over input array to create object of HuffmanNode which is put in TreeEntry and then added to Queue
         for (int i = 0; i < charfreq.length; ++i) {
             HuffmanNode node = new HuffmanNode(charArray[i], charfreq[i]);
-            TreeEntry entrynode = new TreeEntry(node);
+            Node entrynode = new Node(node);
             pq.add(entrynode);
         }
 
         //iterate until there is only one node in the heap
         while (!pq.isEmpty() && pq.size() > 1) {
             //remove top 2 (min nodes) from the heap
-            TreeEntry<HuffmanNode> x = pq.remove();
-            TreeEntry<HuffmanNode> y = pq.remove();
+            Node<HuffmanNode> x = pq.remove();
+            Node<HuffmanNode> y = pq.remove();
 
             //add their counts and create a new node with new count and x as left of that node and  y as right of the node
-            TreeEntry entrynode = new TreeEntry(
+            Node entrynode = new Node(
                     new HuffmanNode('x', x.getElement().count +  y.getElement().count ),
                     x, y
             );

@@ -10,17 +10,17 @@ package BasicDataStructures;
  * Create Entry of Tree Data Structure which has left, right pointers to Entry element and element of that node
  * @param <T>
  */
-public class TreeEntry<T> {
+public class Node<T> {
     T element;
-    TreeEntry<T> left;
-    TreeEntry<T> right;
+    Node<T> left;
+    Node<T> right;
 
-    public TreeEntry(T x) {
+    public Node(T x) {
         this.element = x;
         this.left = this.right = null;
     }
 
-    public TreeEntry(T x, TreeEntry l, TreeEntry r) {
+    public Node(T x, Node l, Node r) {
         this.element = x;
         this.left = l;
         this.right = r;
@@ -34,19 +34,19 @@ public class TreeEntry<T> {
         this.element = element;
     }
 
-    public TreeEntry<T> getLeft() {
+    public Node<T> getLeft() {
         return this.left;
     }
 
-    public void setLeft(TreeEntry<T> left) {
+    public void setLeft(Node<T> left) {
         this.left = left;
     }
 
-    public TreeEntry<T> getRight() {
+    public Node<T> getRight() {
         return this.right;
     }
 
-    public void setRight(TreeEntry<T> right) {
+    public void setRight(Node<T> right) {
         this.right = right;
     }
 
