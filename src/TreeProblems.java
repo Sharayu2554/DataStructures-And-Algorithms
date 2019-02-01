@@ -2,9 +2,6 @@ import BasicDataStructures.Node;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Queue;
-import java.util.Stack;
-
 /**
  * Class to Implement TreeProblems
  *
@@ -95,7 +92,7 @@ public class TreeProblems {
         st.push(cur);
         System.out.print(cur.getElement() + " ");
         cur = cur.getLeft();
-        
+
         while (!st.isEmpty()) {
             if (cur == null) {
                 cur = st.pop();
@@ -109,6 +106,115 @@ public class TreeProblems {
         }
     }
 
+    public void preOrderItroptimized() {
+
+        if (root == null)
+            return;
+
+        Node cur;
+        Deque<Node> st = new ArrayDeque<>();
+        st.push(root);
+        System.out.println("\nPrinting pre Order Optimized Version : ");
+        while (!st.isEmpty()) {
+
+            cur = st.pop();
+            System.out.print(cur.getElement() + " ");
+
+            if (cur.getRight() != null)
+                st.push(cur.getRight());
+
+            if (cur.getLeft() != null)
+                st.push(cur.getLeft());
+        }
+    }
+
+    public void postOrder(Node node) {
+        if (node == null)
+            return;
+
+        postOrder(node.getLeft());
+        postOrder(node.getRight());
+        System.out.print( node.getElement() + " ");
+    }
+
+    public void postOrder(){
+        System.out.println("\nPrinting Post-Order using recursion ");
+        postOrder(root);
+    }
+
+    public void postOrderItr() {
+        if (root == null)
+            return;
+
+        System.out.println("\nPrinting Post-Order using Iteration : ");
+        Deque<Node> st = new ArrayDeque<>();
+        st.push(root);
+        Node cur = root;
+        Node prev = null;
+        cur = cur.getLeft();
+        while(!st.isEmpty()) {
+           if (cur == null) {
+               cur = st.peek();
+               if ((prev != null && prev == cur.getRight()) || cur.getRight()== null) {
+                   st.pop();
+                   prev = cur;
+                   System.out.print(cur.getElement() + " ");
+                   cur = null;
+               }
+               else {
+                  cur = cur.getRight();
+               }
+           }
+           if (cur != null) {
+               st.push(cur);
+               cur = cur.getLeft();
+           }
+        }
+    }
+
+    public Node findBST(Node node, int x) {
+        int y = (int)node.getElement();
+        if (x == y) {
+            return node;
+        }
+        else if (x < y) {
+            if (node.getLeft() == null) {
+                return node;
+            }
+            else {
+                return findBST(node.getLeft(), x);
+            }
+        }
+        else {
+            if (node.getRight() == null) {
+                return node;
+            }
+            else {
+                return findBST(node.getRight(), x);
+            }
+        }
+    }
+
+    public void createBST(int[] arr) {
+        if (arr.length == 0) {
+            root = null;
+            return;
+        }
+
+        root = new Node(arr[0]);
+        for (int i = 1; i < arr.length; i++ ) {
+            Node node = findBST(root, arr[i]);
+            int x = (int) node.getElement();
+            if (arr[i] < x) {
+                node.setLeft(new Node(arr[i]));
+            }
+            else if (arr[i] > x ) {
+                node.setRight(new Node(arr[i]));
+            }
+        }
+        printTree();
+    }
+
     public static void main(String args[]) {
 
         TreeProblems tr = new TreeProblems();
@@ -116,7 +222,18 @@ public class TreeProblems {
         tr.createTree(data);
         tr.printTree();
 
+        System.out.println("\nPre-Orders ");
         tr.preOrder();
         tr.preOrderItr();
+        tr.preOrderItroptimized();
+
+        System.out.println("\nPost-Orders ");
+        tr.postOrder();
+        tr.postOrderItr();
+
+        System.out.println("\nCreate BST's ");
+        tr.createBST(data);
+        tr.preOrderItr();
+        tr.postOrderItr();
     }
 }
