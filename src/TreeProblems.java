@@ -14,6 +14,7 @@ public class TreeProblems {
 
     Node root;
     int size = 0;
+    boolean isBST = false;
 
     public TreeProblems() {
         root = null;
@@ -21,6 +22,7 @@ public class TreeProblems {
     }
 
     public void createTree(int[] data) {
+        isBST = false;
         Node cur, nodel = null, noder = null;
         if (data.length <= 0)
             return;
@@ -172,7 +174,13 @@ public class TreeProblems {
         }
     }
 
-    public Node findBST(Node node, int x) {
+    private Node findBST(Node node, int x) {
+        if (!isBST)
+        {
+            //Ideally Throw Exception
+            return null;
+        }
+
         int y = (int)node.getElement();
         if (x == y) {
             return node;
@@ -196,6 +204,7 @@ public class TreeProblems {
     }
 
     public void createBST(int[] arr) {
+        isBST = true;
         if (arr.length == 0) {
             root = null;
             return;
@@ -214,6 +223,14 @@ public class TreeProblems {
         }
         printTree();
     }
+
+    //private Node LowestCommonAncestorInBST(Node node, int x, int y) {}
+
+//    public Node LowestCommonAncestorInBST(int x, int y){
+//        if (!isBST)
+//            return null;
+//        return LowestCommonAncestorInBST(root, x, y);
+//    }
 
     public static void main(String args[]) {
 
@@ -235,5 +252,6 @@ public class TreeProblems {
         tr.createBST(data);
         tr.preOrderItr();
         tr.postOrderItr();
+
     }
 }

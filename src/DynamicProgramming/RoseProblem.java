@@ -94,5 +94,4 @@ public class RoseProblem {
         int k = 5;
         System.out.println(" "  + findDay(arr, k));
     }
-
 }
