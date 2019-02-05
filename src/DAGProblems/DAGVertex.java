@@ -69,21 +69,11 @@ public class DAGVertex implements Comparable<DAGVertex>, Factory {
 
     @Override
     public String toString() {
-        return "DAGVertex{" +
-                "u=" + u +
-                ", parent=" +( parent == null ? null : parent.u )+
-                ", distance=" + distance +
-                ", cno=" + cno +
-                ", cPath=" + cPath +
-                '}';
+        return u + " ";
     }
 
     public String toStringPath() {
-        return "DAGVertex{" +
-                "u=" + u +
-                ", parent=" + parent +
-                ", distance=" + distance +
-                '}';
+        return u + " ";
     }
 
     public String toStringU() {

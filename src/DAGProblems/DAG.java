@@ -23,17 +23,20 @@ import java.util.*;
  * 1. Find Topological Order in DAG -Done
  * 2. Count Number of Paths in DAG - Done
  * 3. Print All Topological Order in DAG - Done
- * 4. Find all Shortest Path in unWeighted DAG - Done
- * 5. Find all Shortest Path in Weighted DAG - Done
+ * 4. Find all Shortest Path in unWeighted DAG
+ * 5. Find all Shortest Path in Weighted DAG
  * 6. Find Longest Path in DAG - Done
  * 7. Find total Number of components - Done
  * 8. Find all Strongly Connected Components
  * 9. Implement PERT/CPM
- * 10. Euler Circuit in DAG : Eulerian Path is a path in graph that visits every edge exactly once. Eulerian Circuit is an Eulerian Path which starts and ends on the same vertex.
+ * 10. Euler Circuit in DAG : Eulerian Path is a path in graph that visits every edge exactly once.
+ *     Eulerian Circuit is an Eulerian Path which starts and ends on the same vertex.
  * 11. Shortest Path with Exactly K Edges in  DAG and Weighted Graph
  * 12. MultiSource Shortest Paths in UnWeighted Graph
  * 13. Find if there is path between two vertices in a DAG
  * 14. Johnson’s algorithm for All-pairs shortest paths
+ * 15. Count all possible walks from a source to a destination with exactly k edges
+ * 16. Find all Paths in DAG - Done
  */
 public class DAG extends GraphAlgorithm<DAGVertex> {
 
@@ -114,7 +117,42 @@ public class DAG extends GraphAlgorithm<DAGVertex> {
         return topologicalOrder.getLast().cPath;
     }
 
-    public void printAllPathsInDAG() {
+    public void printAllPathsInDAG(Vertex src, Vertex des) {
+
+        LinkedList<Vertex> out = new LinkedList<>();
+        for (Vertex u : g) {
+            DAGVertex du = get(u);
+            du.seen = false;
+            du.parent = null;
+            du.distance = Integer.MAX_VALUE;
+            du.color = "WHITE";
+        }
+
+        get(src).seen = true;
+        out.add(src);
+        printAllPathsInDAG(get(src), get(des), out);
+    }
+
+    public void printAllPathsInDAG(DAGVertex u, DAGVertex des, LinkedList<Vertex> out){
+        if (u.u.equals(des.u)) {
+            System.out.println(" Path " + Arrays.toString(out.toArray()));
+            return;
+        }
+
+        for (Graph.Edge e : g.incident(u.u)) {
+            DAGVertex v = get(e.otherEnd(u.u));
+
+            if (!v.seen) {
+                v.seen = true;
+                out.addLast(v.u);
+                printAllPathsInDAG(v, des, out);
+                out.removeLast();
+                v.seen = false;
+            }
+        }
+    }
+
+    public void PrintAllTopologicalOrdersInDAG() {
         //intialize graph and indegreeArray
         int[] indegree = new int[g.size()];
         for (Vertex u : g) {
@@ -122,10 +160,10 @@ public class DAG extends GraphAlgorithm<DAGVertex> {
             du.seen = false;
             indegree[u.getIndex()] = u.inDegree();
         }
-        printAllPathsInDAG(new ArrayList<>(g.size()), indegree);
+        PrintAllTopologicalOrdersInDAG(new ArrayList<>(g.size()), indegree);
     }
 
-    public void printAllPathsInDAG(ArrayList<DAGVertex> out, int[] indegree) {
+    public void PrintAllTopologicalOrdersInDAG(ArrayList<DAGVertex> out, int[] indegree) {
         boolean done = true;
 
         for (Vertex u : g) {
@@ -139,7 +177,7 @@ public class DAG extends GraphAlgorithm<DAGVertex> {
                     indegree[dv.u.getIndex()]--;
                 }
 
-                printAllPathsInDAG(out, indegree);
+                PrintAllTopologicalOrdersInDAG(out, indegree);
 
                 du.seen = false;
                 out.remove(du);
@@ -222,15 +260,22 @@ public class DAG extends GraphAlgorithm<DAGVertex> {
         }
 
         Graph g = Graph.readGraph(in, true);
-        Vertex s = g.getVertex(1);
+        Vertex src = g.getVertex(1);
+        Vertex des = g.getVertex(g.size());
 
         DAG m = new DAG(g);
 //        m.topologicalOrderInDAG();
-//        System.out.println("COUNT IS " + m.countTotalPaths());
-//        m.printAllPathsInDAG();
-        m.shortestPathInDAG();
-        System.out.println("\n");
-        m.longestPathInDAG();
+        System.out.println("COUNT IS " + m.countTotalPaths());
+//        m.PrintAllTopologicalOrdersInDAG();
+        m.printAllPathsInDAG(src, des);
+//        m.shortestPathInDAG();
+//        System.out.println("\n");
+//        m.longestPathInDAG();
+        //10 14   1 2 1   1 3 1   2 4 1   2 5 1   3 5 1   3 6 1   4 7 1   5 7 1   5 8 1   6 8 1   6 9 1   7 10 1   8 10 1   9 10 1
+//        m.countTotalPathWithKEdges(src, des, 5 );
 
+        //10 15   1 2 1   1 3 1   2 4 1   2 5 1   3 5 1   3 6 1   4 7 1   5 7 1   5 8 1   6 8 1   6 9 1   7 10 1   8 10 1   9 10 1  4 10 1
+
+        //10 18   1 2 1   1 3 1   2 4 1   2 5 1   3 5 1   3 6 1   4 7 1   5 7 1   5 8 1   6 8 1   6 9 1   7 10 1   8 10 1   9 10 1  4 10 1  1 5 1   4 5 1   5 10 1   8 9 1  3 8 1
     }
 }
