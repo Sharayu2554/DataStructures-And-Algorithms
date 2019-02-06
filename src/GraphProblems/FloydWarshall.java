@@ -8,6 +8,9 @@
 
 package GraphProblems;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * This is very similar to Dijktras and Bellman Ford
  * But
@@ -23,7 +26,7 @@ public class FloydWarshall {
 
     static final int INF = 99999;
 
-    static boolean negCyclefloydWarshall(int graph[][]) {
+    static boolean negCyclefloydWarshall(int graph[][], int src, int des) {
         int[][] dist = new int[graph.length][graph.length];
         int[][] path = new int[graph.length][graph.length];
         int V = graph.length;
@@ -31,11 +34,11 @@ public class FloydWarshall {
         for (int i =0; i < V; i++ ) {
             for (int j =0; j< V; j++) {
                 dist[i][j] = graph[i][j];
-                if (graph[i][j] != INF) {
+                if (graph[i][j] != INF && i != j) {
                     path[i][j] = i;
                 }
                 else {
-                    path[i][j] = INF;
+                    path[i][j] = -1;
                 }
             }
         }
@@ -43,7 +46,7 @@ public class FloydWarshall {
         for (int k =0; k< V; k++) {
             for (int i = 0; i < V; i++) {
                 for (int j =0; j < V; j++) {
-                    if (dist[i][k] != INF && dist[i][j] > dist[i][k] + dist[k][j]) {
+                    if ((dist[i][k] != INF || dist[k][j] != INF)&& dist[i][j] > dist[i][k] + dist[k][j]) {
                         dist[i][j] = dist[i][k] + dist[k][j];
                         path[i][j] = path[k][j];
                     }
@@ -59,8 +62,38 @@ public class FloydWarshall {
                 return true;
             }
         }
+
+        printPath(path, src, des);
         return false;
     }
+
+    public static void printPath(int[][] path, int start, int end) {
+        if(start < 0 || end < 0 || start >= path.length || end >= path.length) {
+            throw new IllegalArgumentException();
+        }
+
+        System.out.println("Actual path - between " + start + " " + end);
+        Deque<Integer> stack = new LinkedList<>();
+        stack.addFirst(end);
+        while (true) {
+            end = path[start][end];
+            if(end == -1) {
+                return;
+            }
+            stack.addFirst(end);
+            if(end == start) {
+                break;
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pollFirst() + " ");
+        }
+
+        System.out.println();
+    }
+
+
     // Driver code
     public static void main (String[] args)
     {
@@ -82,10 +115,23 @@ public class FloydWarshall {
                 {-1, INF, INF, 0}
         };
 
-        if (negCyclefloydWarshall(graph))
+        if (negCyclefloydWarshall(graph, 0, 3))
             System.out.print("Yes");
         else
             System.out.print("No");
+
+        int[][] graph1 =  {
+                {0,   3,   6,   15},
+                {INF, 0,  -2,   INF},
+                {INF, INF, 0,   2},
+                {1,   INF, INF, 0}
+        };
+        if (negCyclefloydWarshall(graph1, 3, 2))
+            System.out.print("Yes");
+        else
+            System.out.print("No");
+
+
     }
 
 }
