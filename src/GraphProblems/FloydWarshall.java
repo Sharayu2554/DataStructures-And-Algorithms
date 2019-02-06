@@ -15,7 +15,9 @@ package GraphProblems;
  * time using Dijkstra’s algorithm
  * 2. For a general weighted graph, we can calculate single source shortest distances in O(VE) time using Bellman–Ford Algorithm.
  * 3. The Floyd Warshall Algorithm is for solving the All Pairs Shortest Path problem.
- * The problem is to find shortest distances between every pair of vertices in a given edge weighted directed Graph. 
+ * The problem is to find shortest distances between every pair of vertices in a given edge weighted directed Graph.
+ * 4.Can we do even better for Directed Acyclic Graph (DAG)?
+ * We can calculate single source shortest distances in O(V+E) time for DAGs. The idea is to use Topological Sorting.
  */
 public class FloydWarshall {
 
