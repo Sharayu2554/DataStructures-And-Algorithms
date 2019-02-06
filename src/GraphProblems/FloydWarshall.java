@@ -8,6 +8,15 @@
 
 package GraphProblems;
 
+/**
+ * This is very similar to Dijktras and Bellman Ford
+ * But
+ * 1. For a graph with no negative weights, we can do better and calculate single source shortest distances in O(E + VLogV)
+ * time using Dijkstra’s algorithm
+ * 2. For a general weighted graph, we can calculate single source shortest distances in O(VE) time using Bellman–Ford Algorithm.
+ * 3. The Floyd Warshall Algorithm is for solving the All Pairs Shortest Path problem.
+ * The problem is to find shortest distances between every pair of vertices in a given edge weighted directed Graph. 
+ */
 public class FloydWarshall {
 
     static final int INF = 99999;
