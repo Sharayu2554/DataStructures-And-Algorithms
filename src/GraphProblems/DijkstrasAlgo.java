@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 // Class to represent a node in the graph
+
+/**
+ * Run TIme : O(E + VLogV)
+ */
 class Node implements Comparator<Node> {
     public int node;
     public int cost;
