@@ -25,19 +25,27 @@ public class FloydWarshall {
 
     static boolean negCyclefloydWarshall(int graph[][]) {
         int[][] dist = new int[graph.length][graph.length];
+        int[][] path = new int[graph.length][graph.length];
         int V = graph.length;
 
         for (int i =0; i < V; i++ ) {
             for (int j =0; j< V; j++) {
                 dist[i][j] = graph[i][j];
+                if (graph[i][j] != INF) {
+                    path[i][j] = i;
+                }
+                else {
+                    path[i][j] = INF;
+                }
             }
         }
 
         for (int k =0; k< V; k++) {
             for (int i = 0; i < V; i++) {
                 for (int j =0; j < V; j++) {
-                    if (dist[i][j] > dist[i][k] + graph[k][j]) {
-                        dist[i][j] = dist[i][k] + graph[k][j];
+                    if (dist[i][k] != INF && dist[i][j] > dist[i][k] + dist[k][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                        path[i][j] = path[k][j];
                     }
                 }
             }
