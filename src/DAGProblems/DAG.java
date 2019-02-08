@@ -245,6 +245,69 @@ public class DAG extends GraphAlgorithm<DAGVertex> {
         System.out.println(" print path " + Arrays.toString(finalList.toArray()));
     }
 
+
+    /**
+     * count walks from source to destination with exactly k edges
+     */
+    public void countWalks(Vertex src, Vertex des, int K) {
+
+        //Initialize
+        for (Vertex v : g) {
+            get(v).cPath = 0;
+        }
+        get(src).cPath = 1;
+
+        //Call recursive count walk
+        int count = countWalksR(src, des, K);
+        System.out.println("Total count " + count);
+    }
+
+    public int countWalksR(Vertex src, Vertex u, int K) {
+
+        //count(v, k) = summation of count(u, k-1) where(u to v)
+        //base case : count(src, 0) = 1
+        //base case: count(u, 0) = 0
+        if (K == 0 && u.equals(src))
+            return get(u).cPath;
+        else if (K == 0 && !u.equals(src))
+            return 0;
+
+        int count =0 ;
+        for (Graph.Edge e : g.inEdges(u)) {
+            Vertex v = e.otherEnd(u);
+            count += countWalksR(src, v, K-1);
+        }
+        return count;
+    }
+
+    public void countWalksIterative(Vertex src, Vertex des, int K) {
+
+        //Initialize
+        for (Vertex v : g) {
+            get(v).cPath = 0;
+        }
+        get(src).cPath = 1;
+
+        int[][] count = new int[g.size()][K+1];
+        count[src.getIndex()][0] = 1;
+
+        //Three loops
+        //count(V, K) = Summation for all the edges such that (u,V) exist { count(u, K-1) }
+        //OuterLoop for K
+        //Second Loop for u
+        //Third Loop for summation : such that
+        //if for u, u to v exists then add it to count(v, k) = count(v, k) + count(u, k-1)
+        for (int k = 1; k < K+1; k++) {
+            for (Vertex u : g) {
+                for (Graph.Edge e : g.outEdges(u)) {
+                    Vertex v  = e.otherEnd(u);
+                    count[v.getIndex()][k] += count[u.getIndex()][k-1];
+                }
+            }
+        }
+        System.out.println("Total count : " + count[des.getIndex()][K]);
+    }
+
     public static void main(String[] args) throws FileNotFoundException {
         Scanner in;
         int choice = 2;
@@ -265,9 +328,23 @@ public class DAG extends GraphAlgorithm<DAGVertex> {
 
         DAG m = new DAG(g);
 //        m.topologicalOrderInDAG();
-        System.out.println("COUNT IS " + m.countTotalPaths());
+//        System.out.println("COUNT IS " + m.countTotalPaths());
+        /**
+         *
+         * Input for countWalks : 4 5 1 2 1   1 3 1   1 4 1   2 4 1   3 4 1
+         * Output : 2
+         *
+         * Input : 10 20   1 2 1   1 3 1   2 4 1   2 5 1   3 5 1   3 6 1   4 7 1   5 7 1   5 8 1   6 8 1   6 9 1   7 10 1   8 10 1   9 10 1  4 10 1  1 5 1   4 5 1   5 10 1   8 9 1  3 8 1
+         * K = 2 Output = 1
+         * K = 3 Output = 6
+         * K = 4 Output = 10
+         * K = 5 Output = 5
+         *
+         */
+        m.countWalks(src, des, 5);
+        m.countWalksIterative(src, des, 5);
 //        m.PrintAllTopologicalOrdersInDAG();
-        m.printAllPathsInDAG(src, des);
+//        m.printAllPathsInDAG(src, des);
 //        m.shortestPathInDAG();
 //        System.out.println("\n");
 //        m.longestPathInDAG();
@@ -276,6 +353,6 @@ public class DAG extends GraphAlgorithm<DAGVertex> {
 
         //10 15   1 2 1   1 3 1   2 4 1   2 5 1   3 5 1   3 6 1   4 7 1   5 7 1   5 8 1   6 8 1   6 9 1   7 10 1   8 10 1   9 10 1  4 10 1
 
-        //10 18   1 2 1   1 3 1   2 4 1   2 5 1   3 5 1   3 6 1   4 7 1   5 7 1   5 8 1   6 8 1   6 9 1   7 10 1   8 10 1   9 10 1  4 10 1  1 5 1   4 5 1   5 10 1   8 9 1  3 8 1
+        //10 20   1 2 1   1 3 1   2 4 1   2 5 1   3 5 1   3 6 1   4 7 1   5 7 1   5 8 1   6 8 1   6 9 1   7 10 1   8 10 1   9 10 1  4 10 1  1 5 1   4 5 1   5 10 1   8 9 1  3 8 1
     }
 }
