@@ -52,7 +52,7 @@ public class LocalMinMax {
                     if (arr[i] == arr[i+2])
                         res.add(i+1);
 
-                    flag = 1;
+                    flag = -1;
                     res.add(i+2);
                     i = i + 2;
                 }
