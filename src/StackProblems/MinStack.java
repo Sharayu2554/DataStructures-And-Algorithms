@@ -8,10 +8,7 @@
 
 package StackProblems;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * Design a stack that supports getMin() in O(1) time and O(1) extra space
@@ -158,5 +155,7 @@ public class MinStack {
         t =  s.peek();
         System.out.println(" Peek  : " +t);
         System.out.println(" " + Arrays.toString(s.st.toArray()));
+
+
     }
 }
