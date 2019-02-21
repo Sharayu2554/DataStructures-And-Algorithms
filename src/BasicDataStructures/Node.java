@@ -6,11 +6,13 @@
  */
 package BasicDataStructures;
 
+import java.util.Comparator;
+
 /**
  * Create Entry of Tree Data Structure which has left, right pointers to Entry element and element of that node
  * @param <T>
  */
-public class Node<T> {
+public class Node<T>{
     T element;
     Node<T> left;
     Node<T> right;
@@ -25,6 +27,10 @@ public class Node<T> {
         this.left = l;
         this.right = r;
     }
+
+//    public int compare(T x, T y) {
+//        return x.compareTo(y);
+//    }
 
     public T getElement() {
         return this.element;
