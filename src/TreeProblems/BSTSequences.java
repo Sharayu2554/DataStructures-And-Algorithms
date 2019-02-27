@@ -37,6 +37,13 @@ public class BSTSequences<T> {
         tr.printTree();
     }
 
+    /**
+     * Weave the two list together and return all possible lists
+     * @param first
+     * @param second
+     * @param results
+     * @param prefix
+     */
     public void weaved(LinkedList<T> first, LinkedList<T> second, ArrayList<LinkedList<T>> results, LinkedList<T> prefix) {
 
         if ((first != null && first.size() == 0) || (second != null && second.size() == 0)) {
@@ -80,6 +87,7 @@ public class BSTSequences<T> {
 
         for (LinkedList<T> l : left) {
             for (LinkedList<T> r : right) {
+                //add all possible combinations of l and r with prefix
                 ArrayList<LinkedList<T>> weaved = new ArrayList<>();
                 weaved(l, r, weaved, prefix);
                 result.addAll(weaved);

@@ -28,10 +28,6 @@ public class Node<T>{
         this.right = r;
     }
 
-//    public int compare(T x, T y) {
-//        return x.compareTo(y);
-//    }
-
     public T getElement() {
         return this.element;
     }

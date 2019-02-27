@@ -99,4 +99,33 @@ public class Tree<T> {
         }
         //printTree();
     }
+
+    /**
+     * Input BFS of Tree and for null Treat as Zer0 node values
+     * @param data
+     */
+    public void createTree(T[] data) {
+        isBST = false;
+        Node cur, nodel = null, noder = null;
+        if (data.length <= 0)
+            return;
+
+        root = new Node(data[0]);
+
+        Deque<Node> q = new ArrayDeque<>();
+        q.addLast(root);
+        for (int i = 1; i < data.length; ) {
+
+            cur = q.removeFirst();
+            nodel = new Node(data[i++]);
+            cur.setLeft(nodel);
+            q.addLast(nodel);
+
+            if (i < data.length) {
+                noder = new Node(data[i++]);
+                cur.setRight(noder);
+                q.addLast(noder);
+            }
+        }
+    }
 }
