@@ -8,9 +8,6 @@
 
 package Moderate;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-
 public class NumberTOString {
 
     String[] small = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
