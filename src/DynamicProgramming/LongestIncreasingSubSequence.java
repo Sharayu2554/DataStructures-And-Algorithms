@@ -11,6 +11,7 @@ package DynamicProgramming;
 import java.util.Arrays;
 
 public class LongestIncreasingSubSequence {
+
     public static int NonRecuLIS(int[] arr, int n, int max) {
         int[] L = new int[n];
         L[0] =1;
@@ -46,7 +47,6 @@ public class LongestIncreasingSubSequence {
     public static void main(String[] args)
     {
         int[] A = { 0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15 };
-
         System.out.print("Length of LIS is " + LIS(A, 0, A.length, Integer.MIN_VALUE));
     }
 

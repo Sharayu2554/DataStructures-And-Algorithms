@@ -8,8 +8,12 @@
 
 package Arrays;
 
+import javafx.util.Pair;
+
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 
 public class Problems {
 
@@ -246,103 +250,177 @@ public class Problems {
         return str.length() <= res.length() ? str : res.toString();
     }
 
+    class Pair implements Comparable<Pair> {
+        int val, q, index;
+
+        public Pair(int v, int qu, int i) {
+            val = v;
+            q = qu;
+            index = i;
+        }
+
+        @Override
+        public int compareTo(Pair b) {
+            return Integer.compare(this.val, b.val);
+        }
+
+    }
+    public int[] sortedArray(int[] arr, int k) {
+        int N = arr.length/k;
+        if (arr.length % k > 0) {
+            N = N + 1;
+        }
+        int index[] = new int[N];
+        int[] res = new int[arr.length];
+        int ri = 0;
+        PriorityQueue<Pair> queue = new PriorityQueue<>();
+
+        //k = 3, i = 0, 0  1, k  2, 2k  3, 3k
+        for (int i =0; i< N; i++) {
+            index[i] = i * k;
+            Pair p = new Pair(arr[i * k], i, i * k);
+            queue.add(p);
+        }
+
+
+        while(ri < arr.length)  {
+            Pair p = queue.poll();
+            res[ri] = p.val;
+            if (p.index + 1 >= (p.q + 1) * k || p.index +1 >= arr.length) {
+                index[p.q] = -1;
+            }
+            else {
+                index[p.q] = p.index + 1;
+                queue.add(new Pair(arr[index[p.q]], p.q, index[p.q]));
+            }
+            ri++;
+        }
+        return res;
+    }
+
+    public static void clock() {
+        String r = "";
+        for(int i = 0; i < 24; i++) {
+            for(int j = 0; j < 60; j++) {
+                r = "";
+                if (i < 10) {
+                    r = "0";
+                }
+                r += Integer.toString(i);
+                if(j < 10){
+                    r += "0";
+                }
+                r += Integer.toString(j);
+                System.out.println(r);
+            }
+        }
+
+    }
 
     public static void main(String args[]) {
 
-        String str = "-_";
-        System.out.println(" Has Unique in " + isUnique(str));
+        clock();
+//        String str = "-_";
+//        System.out.println(" Has Unique in " + isUnique(str));
+//
+//        str = "aaaa";
+//        String y = "aaaa";
+//        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //false
+//
+//        str = "abcd";
+//        y = "acbd";
+//        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //true
+//
+//        str = "abbcde";
+//        y = "acbdbe";
+//        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //true
+//
+//        str = "abbbccccdee";
+//        y = "abcdbcebcec";
+//        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //true
+//
+//        str = "abbbccccdeee";
+//        y = "abcdbcebcec";
+//        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //false
+//
+//        str = "abbbccccdddee";
+//        y = "abcdbcebcec";
+//        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //false
+//
+//        str = "Mr John  Smith          ";
+//        System.out.println("Urlify : Input String " + str + " output : " + urlify(str));
+//
+//        str = "   ";
+//        System.out.println("Urlify : Input String " + str + " output : " + urlify(str));
+//
+//        str = "Mr John Smith    ";
+//        System.out.println("Urlify : Input String " + str + " output : " + urlify(str));
+//
+//        str = "Mr";
+//        System.out.println("Urlify : Input String " + str + " output : " + urlify(str));
+//
+//        str = "Mr   ";
+//        System.out.println("Urlify : Input String " + str + " output : " + urlify(str));
+//
+//        String in = "pale";
+//        String out = "bale";
+//        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
+//
+//        in = "pale";
+//        out = "bal";
+//        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
+//
+//        in = "pale";
+//        out = "pales";
+//        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
+//
+//        in = "pale";
+//        out = "bale";
+//        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
+//
+//        in = "pale";
+//        out = "paless";
+//        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
+//
+//        in = "ppp";
+//        out = "bbb";
+//        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
+//
+//        in = "pale";
+//        out = "ple";
+//        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
+//
+//        in = "pale";
+//        out = "bake";
+//        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
+//
+//        str = "";
+//        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
+//
+//        str = "aaaaa";
+//        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
+//
+//        str = "aa";
+//        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
+//
+//        str = "a";
+//        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
+//
+//        str = "abcd";
+//        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
+//
+//        str = "aabcccccddaaa";
+//        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
+//
+//        str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbb";
+//        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
+//
+//        int[] ap = {1, 4, 7, 2, 5, 8, 3, 6, 9, 10, 11, 13, 12};
+//        Problems p = new Problems();
+//        int[] res = p.sortedArray(ap, 3);
+//        System.out.println(Arrays.toString(res));
 
-        str = "aaaa";
-        String y = "aaaa";
-        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //false
 
-        str = "abcd";
-        y = "acbd";
-        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //true
-
-        str = "abbcde";
-        y = "acbdbe";
-        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //true
-
-        str = "abbbccccdee";
-        y = "abcdbcebcec";
-        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //true
-
-        str = "abbbccccdeee";
-        y = "abcdbcebcec";
-        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //false
-
-        str = "abbbccccdddee";
-        y = "abcdbcebcec";
-        System.out.println("Is " + str + " permutation of " + y + " :  " + checkPermutations(str, y)); //false
-
-        str = "Mr John  Smith          ";
-        System.out.println("Urlify : Input String " + str + " output : " + urlify(str));
-
-        str = "   ";
-        System.out.println("Urlify : Input String " + str + " output : " + urlify(str));
-
-        str = "Mr John Smith    ";
-        System.out.println("Urlify : Input String " + str + " output : " + urlify(str));
-
-        str = "Mr";
-        System.out.println("Urlify : Input String " + str + " output : " + urlify(str));
-
-        str = "Mr   ";
-        System.out.println("Urlify : Input String " + str + " output : " + urlify(str));
-
-        String in = "pale";
-        String out = "bale";
-        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
-
-        in = "pale";
-        out = "bal";
-        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
-
-        in = "pale";
-        out = "pales";
-        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
-
-        in = "pale";
-        out = "bale";
-        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
-
-        in = "pale";
-        out = "paless";
-        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
-
-        in = "ppp";
-        out = "bbb";
-        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
-
-        in = "pale";
-        out = "ple";
-        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
-
-        in = "pale";
-        out = "bake";
-        System.out.println("OnwAway x : " + in + " y : " + out  + " is " + oneAway(in, out));
-
-        str = "";
-        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
-
-        str = "aaaaa";
-        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
-
-        str = "aa";
-        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
-
-        str = "a";
-        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
-
-        str = "abcd";
-        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
-
-        str = "aabcccccddaaa";
-        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
-
-        str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbb";
-        System.out.println("String Compression : input is " + str + " result is : " + stringCompression(str));
 
     }
 }

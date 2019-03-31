@@ -17,8 +17,8 @@ public class SearchAlgos<T> {
         int mid = input.length/2;
         int low = 0, high = input.length;
 
-        while (low < high) {
-            mid = (low + high) /2;
+        while (low <= high) {
+            mid = low + ((high - low) /2);
             if (input[mid] == x) {
                 System.out.println(" found " + x + " location :  " +  mid );
                 return mid;

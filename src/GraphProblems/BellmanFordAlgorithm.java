@@ -8,6 +8,10 @@
 
 package GraphProblems;
 
+import BasicDataStructures.Graph;
+
+import java.util.*;
+
 /**
  * Bellman-Ford algorithm, similar to dijkstras algorithm except
  * Dijkstra doesnt detect negative cycle
@@ -120,5 +124,6 @@ public class BellmanFordAlgorithm {
         graph.edge[7].weight = -3;
 
         graph.BellmanFord(0);
-    }
+
+   }
 }

@@ -42,7 +42,7 @@ public class PartitionProblem {
                     dp[i][j] =  dp[i-1][j];
                 }
                 else {
-                    dp[i][j] = dp[i - i][j] || dp[i - 1][j - arr[i - 1]];
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - arr[i - 1]];
                 }
                 //optimized if value becomes true before it reached end,
                 //stop there, not need to process any further

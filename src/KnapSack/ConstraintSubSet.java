@@ -27,7 +27,7 @@ public class ConstraintSubSet {
         int[] res = new int[k+1];
         LinkedList<Integer>[] countW = new LinkedList[k+1];
         for (int i = 0; i < k+1; i++) {
-            countW[i] = new LinkedList<>();
+            countW[i] = new LinkedList<>(); //array of linkedList
         }
         int count[] = new int[k+1];
 

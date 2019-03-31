@@ -63,6 +63,7 @@ public class FinishJobInTime {
                i++;
             }
         }
+        System.out.print(cnt);
         return cnt < K;
     }
 
@@ -75,7 +76,9 @@ public class FinishJobInTime {
 
         int mid = 0, ans = end;
         while (start <= end) {
+
             mid = (start + end)/2;
+            System.out.println(start + " " + mid + " " + end + " ");
             if (mid >= max && check(mid, jobs, N, K)) {
                 ans = Math.min(ans, mid);
                 end = mid -1;
@@ -83,6 +86,7 @@ public class FinishJobInTime {
             else {
                 start = mid +1;
             }
+            System.out.print( " "+ ans + "\n");
         }
         return ans * T;
     }

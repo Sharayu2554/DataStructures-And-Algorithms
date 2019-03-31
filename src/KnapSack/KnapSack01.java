@@ -62,8 +62,8 @@ public class KnapSack01 {
 
     public static void main(String args[])
     {
-        int val[] = new int[]{120, 100, 60};
-        int wt[] = new int[]{3, 2, 1};
+        int val[] = new int[]{100, 120, 60};
+        int wt[] = new int[]{2, 3, 1};
         int  W = 5;
         int n = val.length;
         System.out.println(knapSack(W, wt, val, n));
