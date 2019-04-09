@@ -8,6 +8,8 @@
 
 package Bit;
 
+import java.util.ArrayList;
+
 public class MissingInteger {
 
     /**

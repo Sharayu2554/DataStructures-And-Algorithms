@@ -50,7 +50,6 @@ class LongestCommonSubsequence {
             }
         }
         System.out.println("length of longest common subsequence " + dp[n][m] );
-
         return printSubsequence(x, dp, n, m);
     }
 
