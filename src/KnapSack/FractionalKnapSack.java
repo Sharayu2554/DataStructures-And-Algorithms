@@ -39,14 +39,14 @@ public class FractionalKnapSack {
         }
 
         //sorting items by value;
-        Arrays.sort(iVal, new Comparator<ItemValue>() {
-            @Override
-            public int compare(ItemValue o1, ItemValue o2) {
-                return o2.cost.compareTo(o1.cost) ;
-            }
-        });
+//        Arrays.sort(iVal, new Comparator<ItemValue>() {
+//            @Override
+//            public int compare(ItemValue o1, ItemValue o2) {
+//                return o2.cost.compareTo(o1.cost) ;
+//            }
+//        });
 
-
+        Arrays.sort(iVal, (o1, o2)->{return o2.cost.compareTo(o1.cost);});
         double totalValue = 0d;
 
         for(ItemValue i: iVal){

@@ -16,6 +16,7 @@ import java.util.Arrays;
  *  {7, 3}
  *  {5, 4, 1}
  *  {8, 2}
+ *
  */
 public class ParitionProblemIn3 {
 

@@ -85,11 +85,11 @@ import java.util.Queue;
             }
             Dog d = dogs.peek();
             Cat c = cats.peek();
-
             if (d.isOrderLessThan(c))
                 return dequeueDog();
             else
                 return dequeueCat();
+
         }
     }
 

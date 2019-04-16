@@ -51,6 +51,7 @@ public class RatInMaze {
         if (r >= maze.length || c >= maze[0].length) {
             return false;
         }
+
         return maze[r][c];
     }
 

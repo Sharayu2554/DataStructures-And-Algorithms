@@ -30,7 +30,7 @@ public class JobSchedulingLossMinimizationPercent {
 
     public static double lossMinimization(Integer[] volumes, double percent) {
         //Take Higher values last and smaller values first in production
-        //Good Produuction Day i : ((1-p) ^ (N -i)) * Vi
+        //Good Production Day i : ((1-p) ^ (N -i)) * Vi
         double result = 0;
 
         Arrays.sort(volumes);
