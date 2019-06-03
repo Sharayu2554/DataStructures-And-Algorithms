@@ -34,7 +34,6 @@ public class PowerSet {
     }
 
     public static void main(String args[]) {
-
         PowerSet p = new PowerSet();
         int[] arr =  {1, 2, 3, 4};
         ArrayList<ArrayList<Integer>> sol = p.powerSet(arr);

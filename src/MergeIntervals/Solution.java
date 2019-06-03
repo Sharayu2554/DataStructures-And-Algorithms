@@ -40,7 +40,6 @@ class Solution {
     public List<Interval> merge(List<Interval> intervals) {
 
         Collections.sort(intervals, (o1, o2) -> Integer.compare(o1.start, o2.start));
-        String s = "fd";
         LinkedList<Integer> d = new LinkedList<>();
 
         System.out.println(Arrays.toString(intervals.toArray()));
