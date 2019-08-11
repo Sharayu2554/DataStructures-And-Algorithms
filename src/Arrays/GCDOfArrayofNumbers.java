@@ -28,6 +28,9 @@ public class GCDOfArrayofNumbers {
         return result;
     }
 
+
+
+
     public static void main(String args[]) {
         int a, b;
         int[] myArray ={ 2, 4, 6, 8, 16 };
